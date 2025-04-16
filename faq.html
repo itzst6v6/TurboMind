@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIScratch | FAQ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00c6ff;
+            --secondary: #0072ff;
+            --dark-bg: #0f2027;
+            --card-bg: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            background: linear-gradient(to right, var(--dark-bg), #203a43, #2c5364);
+            color: #fff;
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            line-height: 1.8;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(12px);
+            padding: 1rem 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            padding: 0 20px;
+        }
+
+        .nav-logo {
+            height: 50px;
+            margin-right: auto;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.8rem 1.2rem;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        nav a:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 100px 20px 40px;
+        }
+
+        .faq-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            border-left: 4px solid var(--primary);
+        }
+
+        .faq-card h2 {
+            color: var(--primary);
+            margin-top: 0;
+        }
+
+        .faq-item {
+            margin: 1.5rem 0;
+        }
+
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            padding: 0.8rem 1rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .faq-question:hover {
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .faq-question h3 {
+            margin: 0;
+            font-size: 1.1rem;
+        }
+
+        .faq-question .icon {
+            transition: transform 0.3s;
+        }
+
+        .faq-question.active .icon {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            padding: 0 1rem;
+        }
+
+        .faq-answer.show {
+            max-height: 500px;
+            padding: 1rem;
+        }
+
+        .faq-answer p {
+            margin: 0.5rem 0 0;
+        }
+
+        .faq-answer code {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html">
+                <img src="https://i.imgur.com/vjudEEk.png" alt="AIScratch Logo" class="nav-logo">
+            </a>
+            <a href="index.html">Home</a>
+            <a href="docs.html">Documentation</a>
+            <a href="#top">FAQ</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1 id="top">Frequently Asked Questions</h1>
+
+        <div class="faq-card">
+            <h2><i class="fas fa-key"></i> API Keys</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>How do I get a Gemini API key?</h3>
+                    <i class="fas fa-chevron-down icon"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>1. Go to <a href="https://ai.google.dev/" target="_blank" style="color: var(--primary);">Google AI Studio</a><br>
+                    2. Click "Get API Key"<br>
+                    3. Free tier allows 60 requests per minute</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Is OpenAI free to use?</h3>
+                    <i class="fas fa-chevron-down icon"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>No, OpenAI requires a paid account. Use Gemini for free access.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-card">
+            <h2><i class="fas fa-bolt"></i> Performance</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Why is my AI slow to respond?</h3>
+                    <i class="fas fa-chevron-down icon"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Try these optimizations:<br>
+                    • Use <code>gemini-1.5-flash</code> model<br>
+                    • Reduce response length in system prompts<br>
+                    • Check your internet connection</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>How do I reset the conversation memory?</h3>
+                    <i class="fas fa-chevron-down icon"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Use the <code>reset memory</code> block or restart your project.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-card">
+            <h2><i class="fas fa-exclamation-triangle"></i> Troubleshooting</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>I'm getting "API Error" messages</h3>
+                    <i class="fas fa-chevron-down icon"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>1. Verify your API key is correctly set<br>
+                    2. Check the <a href="docs.html#models" style="color: var(--primary);">model compatibility</a><br>
+                    3. Ensure you're not exceeding rate limits</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Blocks aren't showing up in TurboWarp</h3>
+                    <i class="fas fa-chevron-down icon"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>1. Reload the extension<br>
+                    2. Clear browser cache<br>
+                    3. Re-download <code>ai.js</code> from our <a href="docs.html#download" style="color: var(--primary);">docs</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', () => {
+                    const answer = question.nextElementSibling;
+                    const isActive = question.classList.contains('active');
+                    
+                    // Close all other open answers
+                    document.querySelectorAll('.faq-question.active').forEach(activeQuestion => {
+                        if (activeQuestion !== question) {
+                            activeQuestion.classList.remove('active');
+                            activeQuestion.nextElementSibling.classList.remove('show');
+                        }
+                    });
+                    
+                    // Toggle current question
+                    question.classList.toggle('active');
+                    answer.classList.toggle('show');
+                    
+                    // If we're closing this one, no need to scroll
+                    if (!isActive) {
+                        // Smooth scroll to keep question visible
+                        question.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

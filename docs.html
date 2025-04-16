@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIScratch | Documentation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00c6ff;
+            --secondary: #0072ff;
+            --dark-bg: #0f2027;
+            --card-bg: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            background: linear-gradient(to right, var(--dark-bg), #203a43, #2c5364);
+            color: #fff;
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            line-height: 1.8;
+            scroll-behavior: smooth;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(12px);
+            padding: 1rem 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            padding: 0 20px;
+        }
+
+        .nav-logo {
+            height: 50px;
+            margin-right: auto;
+            transition: transform 0.3s;
+        }
+
+        .nav-logo:hover {
+            transform: rotate(-5deg);
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.8rem 1.2rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 100px 20px 40px;
+        }
+
+        /* Documentation Styles */
+        .docs-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .docs-header h1 {
+            font-size: 3.5rem;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        .block-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            border-left: 4px solid var(--primary);
+            transition: transform 0.3s;
+        }
+
+        .block-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .block-card h2 {
+            color: var(--primary);
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .params-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+
+        .params-table th {
+            text-align: left;
+            padding: 1rem;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .params-table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--card-bg);
+        }
+
+        /* Code Blocks */
+        pre[class*="language-"] {
+            border-radius: 12px;
+            margin: 1.5rem 0;
+            position: relative;
+        }
+
+        .copy-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .copy-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Download Section */
+        .download-card {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .download-btn {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border: none;
+            padding: 1.2rem 2.5rem;
+            color: white;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            text-decoration: none;
+            margin: 1rem 0;
+        }
+
+        .download-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(0, 198, 255, 0.4);
+        }
+
+        .file-info {
+            margin-top: 1rem;
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 1rem;
+            height: 1rem;
+            border: 2px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+            margin-left: 0.5rem;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .docs-header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .nav-container {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+            
+            .params-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html">
+                <img src="https://i.imgur.com/vjudEEk.png" alt="AIScratch Logo" class="nav-logo">
+            </a>
+            <a href="#blocks">Blocks</a>
+            <a href="#models">Models</a>
+            <a href="#download">Download</a>
+            <a href="index.html"><i class="fas fa-arrow-left"></i> Back to Home</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <section class="docs-header">
+            <h1>AIScratch Documentation</h1>
+            <p>Complete reference for all blocks and features</p>
+        </section>
+
+        <!-- Blocks Documentation -->
+        <section id="blocks">
+            <div class="block-card">
+                <h2><i class="fas fa-cube"></i> get text Block</h2>
+                <pre><code class="language-blocks">
+get text [PROMPT] systemPrompt [SYSTEM_PROMPT] provider [PROVIDER] model [MODEL]
+                </code></pre>
+
+                <p>Retrieves AI-generated text based on the given prompt and parameters.</p>
+
+                <h3>Parameters</h3>
+                <table class="params-table">
+                    <tr>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                        <th>Default</th>
+                    </tr>
+                    <tr>
+                        <td>PROMPT</td>
+                        <td>String</td>
+                        <td>The user's input/question for the AI</td>
+                        <td>"Hello"</td>
+                    </tr>
+                    <tr>
+                        <td>SYSTEM_PROMPT</td>
+                        <td>String</td>
+                        <td>Instructions guiding the AI's behavior</td>
+                        <td>"You are a helpful assistant"</td>
+                    </tr>
+                    <tr>
+                        <td>PROVIDER</td>
+                        <td>Menu</td>
+                        <td>AI service provider (Gemini/OpenAI)</td>
+                        <td>"gemini"</td>
+                    </tr>
+                    <tr>
+                        <td>MODEL</td>
+                        <td>Menu</td>
+                        <td>Specific AI model version to use</td>
+                        <td>"gemini-1.5-flash"</td>
+                    </tr>
+                </table>
+
+                <h3>Example Usage</h3>
+                <pre><code class="language-javascript">
+when flag clicked
+ask [Enter your question] and wait
+set [response v] to (get text (answer) systemPrompt [Respond like a pirate] provider [gemini] model [gemini-1.5-flash])
+say (response) for (2) secs
+                </code></pre>
+            </div>
+
+            <div class="block-card">
+                <h2><i class="fas fa-save"></i> save memory Block</h2>
+                <pre><code class="language-blocks">
+save memory [KEY] [VALUE]
+                </code></pre>
+
+                <p>Stores information in the AI's long-term memory for future conversations.</p>
+
+                <h3>Example Usage</h3>
+                <pre><code class="language-javascript">
+when [m v] key pressed
+if &lt;(answer) contains [my name is]&gt; then
+  save memory [username] (text after [my name is] in (answer))
+end
+                </code></pre>
+            </div>
+        </section>
+
+        <!-- Model Support -->
+        <section id="models">
+            <div class="block-card">
+                <h2><i class="fas fa-brain"></i> Supported Models</h2>
+                
+                <h3>Google Gemini Models</h3>
+                <ul>
+                    <li><strong>gemini-1.5-flash</strong> - Fastest response time, good for simple queries</li>
+                    <li><strong>gemini-1.5-pro</strong> - More capable model for complex tasks</li>
+                </ul>
+                
+                <h3>OpenAI Models</h3>
+                <ul>
+                    <li><strong>gpt-3.5-turbo</strong> - Cost-effective balance of speed and capability</li>
+                    <li><strong>gpt-4</strong> - Most advanced model (requires OpenAI API key)</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Download Section -->
+        <section id="download">
+            <div class="block-card download-card">
+                <h2><i class="fas fa-download"></i> Download & Installation</h2>
+                
+                <h3>Installation Steps</h3>
+                <ol>
+                    <li>Download the extension file below</li>
+                    <li>In TurboWarp/PenguinMod:
+                        <ul>
+                            <li>Click the Extensions button (bottom-left)</li>
+                            <li>Select "Custom Extension"</li>
+                            <li>Upload the <code>ai.js</code> file</li>
+                        </ul>
+                    </li>
+                </ol>
+                
+                <button class="download-btn" id="downloadButton">
+                    <i class="fas fa-download"></i>
+                    <span id="downloadText">Download ai.js</span>
+                    <span class="loading-spinner" id="downloadSpinner" style="display: none;"></span>
+                </button>
+                <p class="file-info" id="fileInfo">
+                    <span id="sizeInfo">Fetching latest version...</span>
+                    <span id="hashInfo"></span>
+                </p>
+            </div>
+        </section>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+    <script>
+        // GitHub API integration
+        async function fetchFileInfo() {
+            const downloadBtn = document.getElementById('downloadButton');
+            const downloadText = document.getElementById('downloadText');
+            const spinner = document.getElementById('downloadSpinner');
+            const sizeInfo = document.getElementById('sizeInfo');
+            const hashInfo = document.getElementById('hashInfo');
+
+            try {
+                // Show loading state
+                downloadText.textContent = 'Loading...';
+                spinner.style.display = 'inline-block';
+                sizeInfo.textContent = 'Fetching file details...';
+                hashInfo.textContent = '';
+
+                // Fetch file metadata from GitHub API
+                const response = await fetch('https://api.github.com/repos/itzts6v6/aiscratch/contents/ai.js');
+                
+                if (!response.ok) {
+                    throw new Error(`GitHub API error: ${response.status}`);
+                }
+
+                const data = await response.json();
+                
+                // Convert bytes to KB
+                const fileSize = (data.size / 1024).toFixed(1) + 'KB';
+                const sha = data.sha.substring(0, 7); // Shorten hash for display
+                
+                // Update download button
+                downloadText.textContent = 'Download ai.js';
+                spinner.style.display = 'none';
+                
+                // Set download action
+                downloadBtn.onclick = () => {
+                    window.open(data.download_url, '_blank');
+                };
+                
+                // Update file info
+                sizeInfo.textContent = `File size: ${fileSize}`;
+                hashInfo.textContent = ` | SHA: ${sha}`;
+
+            } catch (error) {
+                console.error('Error fetching file info:', error);
+                downloadText.textContent = 'Download ai.js';
+                spinner.style.display = 'none';
+                sizeInfo.textContent = 'Latest version available';
+                hashInfo.textContent = '';
+
+                // Fallback download action
+                downloadBtn.onclick = () => {
+                    window.open('https://raw.githubusercontent.com/itzts6v6/aiscratch/main/ai.js', '_blank');
+                };
+            }
+        }
+
+        // Copy to Clipboard Functionality
+        document.querySelectorAll('pre').forEach((pre) => {
+            const button = document.createElement('button');
+            button.className = 'copy-button';
+            button.innerHTML = '<i class="far fa-copy"></i>';
+            button.addEventListener('click', () => {
+                navigator.clipboard.writeText(pre.textContent);
+                button.innerHTML = '<i class="fas fa-check"></i>';
+                setTimeout(() => {
+                    button.innerHTML = '<i class="far fa-copy"></i>';
+                }, 2000);
+            });
+            pre.appendChild(button);
+        });
+
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchFileInfo();
+        });
+    </script>
+</body>
+</html>
